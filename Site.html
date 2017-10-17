@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <title><b>UTD Comet Cabs</b></title>
+    <style>
+        main{
+            margin-top: 30px;
+        }
+        ul{
+            list-style-type: none;
+            margin: 0;
+            padding: 0;
+            background-color: #333;
+            overflow: hidden;
+            position: fixed;
+            top: 0;
+            width: 100%;
+        }
+        li a{
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+        li{
+            float: left;
+            border-right: 1px solid #bbb;
+        }
+        li a:hover:not(.active){
+            background-color: #111;
+        }
+        .active{
+            background-color: #4CAF50;
+        }
+        h3 {
+            font: simplified;
+            font-size: 40px;
+            color: black;
+            text-align: center;
+        }
+        body{
+            background-image: url("https://alumni.utdallas.edu/image/-wallpaper/Trellis-Evening-1920.jpg");
+        }
+        button{
+            position: absolute;
+            top: 10%;
+            left: 50%;
+            text-align: center;
+            background-color: white;
+            font-size: 14px;
+            border-radius: 4px;
+            padding: 10px;
+            transition-duration: 0.4s;
+            cursor: pointer;
+        }
+        button:hover{
+            background-color: #008CBA;
+            color: white;
+        }
+        #map {
+            position: fixed;
+            top: 3%;
+            left: 1%;
+            height: 50%;
+            width: 800px;
+        }
+        html, body {
+            height: 90%;
+            margin: .1in;
+            padding: 0; }
+    </style>
+    <script>
+        function initMap() {
+            var utd = {lat: 32.987437, lng: -96.749934};
+            var data;
+            var marker;
+            var myLatLng;
+            var icon ={
+                url: "http://www.clipartsfree.net/vector/small/1300069083_Clipart_Free.png",
+                scaledSize: new google.maps.Size(75,75)
+            };
+            var map = new google.maps.Map(document.getElementById('map'), {
+                zoom: 16,
+                center: utd
+            });
+            var json;
+            //var json = {"cabs": [{"updated": "11:04:28", "name": "Rutford North", "moved": "11:04:28", "longitude": "-96.7501220703", "id": "7102760", "ignition": true, "latitude": "32.9901733398", "velocity": 0, "heading": 11}, {"updated": "10:37:51", "name": "Rutford South", "moved": "18:54:48", "longitude": "-96.750289917", "id": "7104491", "ignition": true, "latitude": "32.9902229309", "velocity": 0, "heading": 182}, {"updated": "12:09:11", "name": "McDermott", "moved": "12:42:10", "longitude": "-96.7507553101", "id": "7106219", "ignition": true, "latitude": "32.9898643494", "velocity": 0, "heading": 0}, {"updated": "10:38:10", "name": "Canyon Creek", "moved": "18:58:39", "longitude": "-96.7497024536", "id": "7106824", "ignition": true, "latitude": "32.9906158447", "velocity": 0, "heading": 34}, {"updated": "10:38:10", "name": "Phase 4-7", "moved": "19:01:10", "longitude": "-96.7500228882", "id": "7107681", "ignition": true, "latitude": "32.990234375", "velocity": 0, "heading": 29}, {"updated": "10:37:48", "name": "Commons", "moved": "10:37:48", "longitude": "-96.7501373291", "id": "7107893", "ignition": true, "latitude": "32.9902000427", "velocity": 0, "heading": 167}, {"updated": "11:04:33", "name": "Phase 1-3", "moved": "11:04:33", "longitude": "-96.750541687", "id": "7110694", "ignition": true, "latitude": "32.9894638062", "velocity": 0, "heading": 23}]};
+            $.getJSON("https://t8ubh7xmac.execute-api.us-east-2.amazonaws.com/Test", function json1(data1){
+                json = data1;
+                console.log(json.cabs[0].name);
+                for (var i = 0; i < json.cabs.length; i++) {
+                    data = json.cabs[i];
+                    console.log("JSON data: " + data);
+                    myLatLng = {lat: parseFloat(data.latitude), lng: parseFloat(data.longitude)};
+                    console.log("String -> number: " + myLatLng);
+                    marker = new google.maps.Marker({
+                        position: myLatLng,
+                        map: map,
+                        title: data.name,
+                        label: data.name,
+                        icon: icon
+                    });
+                }
+            });
+
+        }
+
+
+    </script>
+    <script async defer
+            src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBGRuNnr5VwUfuE8LVfFnP6p2AUMvftzRs&callback=initMap">
+    </script>
+
+</head>
+<script src="http://code.jquery.com/jquery-latest.min.js" type="text/javascript"></script>
+<body>
+<h3><b>Comet Cab Tracker</b></h3>
+<ul>
+    <li><a class="active" href="#home">Home</a></li>
+    <li><a href="#about">About</a></li>
+    <li><a href="#contact">Contact</a></li>
+    <li><a href="#donate">Donate</a></li>
+</ul>
+<button type="button" button onclick="initMap()">Refresh</button>
+<div id="map" style="height: 100%;"></div>
+</body>
+</html>
