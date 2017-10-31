@@ -1,0 +1,91 @@
+header{
+    display: table;
+    margin: 0px auto 0px auto;
+    padding: 5px;
+    font-size: 20px;
+    background-color: silver;
+    color: black;
+}
+button{
+    position: fixed;
+    top: 10%;
+    left: 50%;
+    text-align: center;
+    background-color: black;
+    color: white;
+    font-size: 14px;
+    border-radius: 4px;
+    padding: 10px;
+    transition-duration: 0.4s;
+    cursor: pointer;
+    z-index: 5;
+}
+button:hover{
+    background-color: #008CBA;
+    color: white;
+}
+#map {
+    height: 100%;
+    position: fixed;
+    z-index: 1;
+}
+html, body{
+    height: 100%;
+    margin: 0;
+    padding: 0;
+}
+ul{
+    list-style-type: none;
+    margin-top: 0px;
+    margin-bottom: 0px;
+    padding: 0;
+    background-color: #333;
+    overflow: hidden;
+    position: sticky;
+    top: 0;
+    width: 100%;
+    z-index: 9;
+}
+li a{
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+li{
+    float: left;
+    border-right: 1px solid #bbb;
+}
+li a:hover:not(.active){
+    background-color: #111;
+}
+.active{
+    background-color: #4CAF50;
+}
+table{
+    top: 20%;
+    right: 15%;
+    border: 5px solid black;
+    border-collapse: collapse;
+    position: fixed;
+    z-index: 5;
+}
+th{
+    background-color: lightgray;
+    color: black;
+    opacity: 0.7;
+}
+tr {
+    background-color: lightgray;
+    opacity: 0.7;
+}
+tr:hover {
+    background-color: black;
+    color: white;
+    opacity: 1;
+}
+th,td{
+    padding: 15px;
+    border: 3px solid black;
+}
